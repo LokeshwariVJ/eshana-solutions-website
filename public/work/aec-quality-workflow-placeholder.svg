@@ -1,0 +1,24 @@
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">AEC Quality Workflow screenshot placeholder</title>
+  <desc id="desc">A restrained workflow placeholder for the AEC Quality Workflow case study.</desc>
+  <rect width="900" height="520" fill="#F8F4ED"/>
+  <rect x="54" y="48" width="792" height="424" fill="#FFFDF9" stroke="#DED6C9"/>
+  <rect x="92" y="86" width="216" height="348" fill="#F1ECE3" stroke="#DED6C9"/>
+  <rect x="126" y="124" width="116" height="10" fill="#242321"/>
+  <rect x="126" y="164" width="140" height="8" fill="#67645E"/>
+  <rect x="126" y="194" width="110" height="8" fill="#67645E"/>
+  <rect x="126" y="224" width="128" height="8" fill="#67645E"/>
+  <rect x="348" y="86" width="460" height="92" fill="#F8F4ED" stroke="#DED6C9"/>
+  <rect x="382" y="122" width="174" height="10" fill="#242321"/>
+  <rect x="382" y="150" width="310" height="8" fill="#67645E"/>
+  <rect x="348" y="212" width="132" height="132" fill="#FFFDF9" stroke="#DED6C9"/>
+  <rect x="510" y="212" width="132" height="132" fill="#FFFDF9" stroke="#DED6C9"/>
+  <rect x="672" y="212" width="132" height="132" fill="#FFFDF9" stroke="#DED6C9"/>
+  <rect x="382" y="250" width="64" height="8" fill="#2F6F6A"/>
+  <rect x="544" y="250" width="64" height="8" fill="#2F6F6A"/>
+  <rect x="706" y="250" width="64" height="8" fill="#2F6F6A"/>
+  <path d="M480 278H510" stroke="#2F6F6A"/>
+  <path d="M642 278H672" stroke="#2F6F6A"/>
+  <rect x="348" y="378" width="456" height="56" fill="#F1ECE3" stroke="#DED6C9"/>
+  <rect x="382" y="401" width="244" height="8" fill="#67645E"/>
+</svg>
