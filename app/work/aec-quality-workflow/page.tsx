@@ -26,6 +26,7 @@ export default function AecQualityWorkflowPage() {
               alt=""
               width={900}
               height={520}
+              priority
               className="aspect-[16/10] w-full object-cover"
             />
           </div>
