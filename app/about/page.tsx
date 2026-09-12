@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero, SectionIntro } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -20,15 +21,17 @@ export default function AboutPage() {
       </PageHero>
 
       <section className="section-pad">
-        <div className="container-grid grid gap-12 lg:grid-cols-[0.55fr_1fr]">
-          <div className="min-h-[24rem] border border-line bg-paper p-6">
-            <div className="flex h-full items-end border border-dashed border-line bg-surface p-5">
-              <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted">
-                Founder photo
-              </p>
-            </div>
+        <div className="container-grid grid items-start gap-12 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)]">
+          <div className="relative aspect-[4/5] w-full min-w-0 max-w-80 overflow-hidden rounded-[2px] border border-line lg:max-w-[25rem]">
+            <Image
+              src="/images/founder-lokeshwari.jpg"
+              alt="Lokeshwari Padmanabhan, Founder and Quality Engineering Consultant at Eshana Software Solutions"
+              fill
+              sizes="(min-width: 1150px) 400px, (min-width: 1024px) calc((100vw - 80px) * 0.375), (min-width: 352px) 320px, calc(100vw - 32px)"
+              className="object-cover object-center"
+            />
           </div>
-          <div>
+          <div className="min-w-0">
             <SectionIntro title="Lokeshwari Padmanabhan">
               <p>Founder & Quality Engineering Consultant</p>
             </SectionIntro>
