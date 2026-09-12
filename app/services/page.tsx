@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ButtonLink, PageHero, SectionIntro } from "@/components/ui";
-import { GateBoundaries, GateChecks, GateEngagement } from "@/components/ai-initiative-gate";
-import { gateContactPath, gateOutputs, gatePath } from "@/lib/ai-initiative-gate";
+import { gateEngagement, gatePath } from "@/lib/ai-initiative-gate";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -73,30 +72,25 @@ export default function ServicesPage() {
 
       <section className="section-pad border-t border-line">
         <div className="container-grid">
-          <SectionIntro eyebrow="Evidence before investment" title="AI Initiative Assessment">
-            <p>AI ideas are easy to generate. Deciding which ones deserve funding is harder.</p>
-            <p>Eshana&apos;s AI Initiative Gate helps teams evaluate proposed AI initiatives before committing budget, infrastructure, or engineering capacity.</p>
-            <p>Each idea is assessed against the same criteria so leadership can compare opportunities using evidence rather than enthusiasm.</p>
+          <SectionIntro title="AI Initiative Assessment">
+            <p>A structured decision gate for teams deciding which AI initiatives deserve funding, deeper assessment, or a pilot.</p>
           </SectionIntro>
-          <GateChecks />
-          <div className="mt-12 grid gap-6 border-t border-line pt-8 md:grid-cols-[0.7fr_1fr]">
-            <div>
-              <h3 className="text-sm font-semibold uppercase text-teal">Output</h3>
-              <p className="mt-3 text-lg text-ink">Each initiative receives:</p>
-            </div>
-            <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
-              {gateOutputs.map((output) => <li key={output} className="text-base leading-7 text-muted">{output}</li>)}
-            </ul>
-          </div>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <ButtonLink href={gatePath}>Explore the AI Initiative Gate</ButtonLink>
-            <ButtonLink href={gateContactPath} variant="secondary">Discuss your AI idea list</ButtonLink>
+          <ol className="mt-10 grid gap-8 md:grid-cols-3">
+            {gateEngagement.map((step, index) => (
+              <li key={step.title} className="min-w-0 border-t border-line pt-6">
+                <p className="text-sm font-medium text-teal" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
+                <h3 className="mt-3 text-xl font-semibold text-ink">{step.summaryTitle}</h3>
+                <p className="mt-3 text-base font-medium text-ink">{step.price}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-8 text-sm text-muted">Workshop fee is credited toward a Full Gate Assessment if you proceed within 30 days.</p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <ButtonLink href={gatePath}>Learn about the AI Initiative Gate</ButtonLink>
           </div>
         </div>
       </section>
 
-      <GateEngagement />
-      <GateBoundaries />
 
       <section className="section-pad border-t border-line bg-paper">
         <div className="container-grid">

@@ -10,7 +10,7 @@ import {
   SectionIntro,
   WorkPreview,
 } from "@/components/ui";
-import { gateContactPath, gatePath } from "@/lib/ai-initiative-gate";
+import { gatePath } from "@/lib/ai-initiative-gate";
 
 export default function Home() {
   return (
@@ -82,16 +82,15 @@ export default function Home() {
       <section className="border-b border-line py-16">
         <div className="container-grid grid gap-8 lg:grid-cols-[0.65fr_1fr] lg:gap-12">
           <div>
-            <p className="mb-4 text-sm font-medium uppercase text-teal">New advisory offering</p>
-            <h2 className="text-3xl font-semibold text-ink">AI Initiative Gate</h2>
+            <p className="mb-4 text-sm font-medium uppercase text-teal">AI Initiative Gate</p>
+            <h2 className="text-3xl font-semibold text-ink">Before you fund the next AI idea, test the business case.</h2>
           </div>
           <div className="space-y-5 text-base leading-7 text-muted">
-            <p className="text-lg text-ink">Have a list of AI ideas but no clear way to decide which one deserves funding?</p>
             <p>Eshana evaluates feasibility, infrastructure readiness, ownership, risk, ROI, and pilot success criteria before money moves.</p>
-            <p className="text-sm font-medium text-teal">Go · Conditional · No-Go — with evidence behind the recommendation.</p>
+            <p className="font-medium text-ink">Workshop — $1,500 fixed</p>
+            <p className="text-sm">Workshop fee credited toward a Full Gate Assessment if you proceed within 30 days.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <ButtonLink href={gatePath}>Explore the AI Initiative Gate</ButtonLink>
-              <ButtonLink href={gateContactPath} variant="secondary">Discuss your AI idea list</ButtonLink>
             </div>
           </div>
         </div>
