@@ -23,7 +23,7 @@ export default function QualityAuditPage() {
       <PageHero
         eyebrow="Quality Audit"
         title="Before you launch, let someone try to break it."
-        actions={<ButtonLink href="/contact">Request a Quality Audit</ButtonLink>}
+        actions={<ButtonLink href="/contact?service=quality-audit">Request a Quality Audit</ButtonLink>}
       >
         <p>
           A focused review for teams who want an independent look at the

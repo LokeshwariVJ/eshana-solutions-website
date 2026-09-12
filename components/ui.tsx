@@ -18,7 +18,7 @@ export function ButtonLink({
       href={href}
       className={
         variant === "primary"
-          ? "inline-flex min-h-12 items-center justify-center border border-charcoal bg-charcoal px-5 py-3 text-sm font-medium text-ivory transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal motion-reduce:hover:translate-y-0"
+          ? "inline-flex min-h-12 items-center justify-center border border-teal bg-teal px-5 py-3 text-sm font-medium text-ivory transition hover:-translate-y-0.5 hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal motion-reduce:hover:translate-y-0"
           : "inline-flex min-h-12 items-center justify-center border border-line bg-transparent px-5 py-3 text-sm font-medium text-charcoal transition hover:-translate-y-0.5 hover:border-teal hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal motion-reduce:hover:translate-y-0"
       }
     >
@@ -109,12 +109,18 @@ export function WorkPreview({
   href,
   tags,
   image,
+  imageAlt,
+  imageWidth,
+  imageHeight,
 }: {
   title: string;
   summary: string;
   href: string;
   tags: string[];
   image: string;
+  imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
 }) {
   return (
     <article className="group border border-line bg-surface transition hover:-translate-y-1 hover:border-teal motion-reduce:hover:translate-y-0">
@@ -125,10 +131,11 @@ export function WorkPreview({
         <div className="border-b border-line bg-paper p-4">
           <Image
             src={image}
-            alt=""
-            width={900}
-            height={520}
-            className="aspect-[16/10] w-full object-cover"
+            alt={imageAlt}
+            width={imageWidth}
+            height={imageHeight}
+            sizes="(min-width: 768px) 50vw, calc(100vw - 2rem)"
+            className="aspect-[16/10] w-full border border-line bg-ivory object-contain"
           />
         </div>
         <div className="space-y-5 p-6 md:p-7">

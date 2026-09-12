@@ -60,7 +60,11 @@ export const selectedWork = [
     summary: "AI-assisted regression failure investigation",
     href: "/work/triagezero",
     tags: ["Playwright", "Gemini", "Google ADK", "Google Cloud"],
-    image: "/work/triagezero-placeholder.svg",
+    image: "/images/triagezero-command-center.png",
+    imageAlt:
+      "TriageZero command center showing AI-assisted regression failure investigations and release-risk metrics",
+    imageWidth: 2686,
+    imageHeight: 1604,
   },
   {
     slug: "aec-quality-workflow",
@@ -68,7 +72,11 @@ export const selectedWork = [
     summary: "Digitizing an engineering QA/QC review process",
     href: "/work/aec-quality-workflow",
     tags: ["Next.js", "Supabase", "Playwright", "Vercel"],
-    image: "/work/aec-quality-workflow-placeholder.svg",
+    image: "/images/aec-qaqc-dashboard.png",
+    imageAlt:
+      "AEC QA/QC dashboard showing project checklist status, open issues, flagged items, and project-phase quality metrics",
+    imageWidth: 2486,
+    imageHeight: 1604,
   },
 ];
 

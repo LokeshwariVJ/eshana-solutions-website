@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/site";
 const routes = [
   "",
   "/services",
+  "/services/ai-initiative-gate",
   "/work",
   "/work/triagezero",
   "/work/aec-quality-workflow",

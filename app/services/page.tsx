@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ButtonLink, PageHero, SectionIntro } from "@/components/ui";
+import { GateBoundaries, GateChecks, GateEngagement } from "@/components/ai-initiative-gate";
+import { gateContactPath, gateOutputs, gatePath } from "@/lib/ai-initiative-gate";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -68,6 +70,33 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
+
+      <section className="section-pad border-t border-line">
+        <div className="container-grid">
+          <SectionIntro eyebrow="Evidence before investment" title="AI Initiative Assessment">
+            <p>AI ideas are easy to generate. Deciding which ones deserve funding is harder.</p>
+            <p>Eshana&apos;s AI Initiative Gate helps teams evaluate proposed AI initiatives before committing budget, infrastructure, or engineering capacity.</p>
+            <p>Each idea is assessed against the same criteria so leadership can compare opportunities using evidence rather than enthusiasm.</p>
+          </SectionIntro>
+          <GateChecks />
+          <div className="mt-12 grid gap-6 border-t border-line pt-8 md:grid-cols-[0.7fr_1fr]">
+            <div>
+              <h3 className="text-sm font-semibold uppercase text-teal">Output</h3>
+              <p className="mt-3 text-lg text-ink">Each initiative receives:</p>
+            </div>
+            <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+              {gateOutputs.map((output) => <li key={output} className="text-base leading-7 text-muted">{output}</li>)}
+            </ul>
+          </div>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <ButtonLink href={gatePath}>Explore the AI Initiative Gate</ButtonLink>
+            <ButtonLink href={gateContactPath} variant="secondary">Discuss your AI idea list</ButtonLink>
+          </div>
+        </div>
+      </section>
+
+      <GateEngagement />
+      <GateBoundaries />
 
       <section className="section-pad border-t border-line bg-paper">
         <div className="container-grid">

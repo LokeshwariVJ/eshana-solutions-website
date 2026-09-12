@@ -19,18 +19,19 @@ export default function AecQualityWorkflowPage() {
         <p>Digitizing an engineering QA/QC review process.</p>
       </PageHero>
       <section className="section-pad">
-        <div className="container-grid grid gap-10 lg:grid-cols-[0.9fr_1fr]">
-          <div className="border border-line bg-paper p-4">
+        <div className="container-grid space-y-10">
+          <div className="rounded-[2px] border border-line bg-paper p-3 md:p-4">
             <Image
               src={work.image}
-              alt=""
-              width={900}
-              height={520}
+              alt={work.imageAlt}
+              width={work.imageWidth}
+              height={work.imageHeight}
               priority
-              className="aspect-[16/10] w-full object-cover"
+              sizes="(min-width: 1180px) 1180px, calc(100vw - 2rem)"
+              className="h-auto w-full rounded-[2px] border border-line bg-ivory"
             />
           </div>
-          <div className="space-y-7">
+          <div className="max-w-3xl space-y-7">
             <TagList tags={work.tags} />
             <div className="space-y-5 text-lg leading-8 text-muted">
               <p>
