@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Footer, Header } from "@/components/site-shell";
 import { siteConfig } from "@/lib/site";
+import { brandSocialImage, socialDescription, socialTitle } from "@/lib/social";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,23 +13,26 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   alternates: {
-    canonical: "/",
+    canonical: `${siteConfig.url}/`,
   },
   openGraph: {
     type: "website",
-    url: siteConfig.url,
+    url: `${siteConfig.url}/`,
     siteName: siteConfig.name,
-    title: "Eshana Software Solutions | Quality Engineering & Test Automation",
-    description: siteConfig.description,
+    title: socialTitle,
+    description: socialDescription,
+    images: [brandSocialImage],
   },
   twitter: {
-    card: "summary",
-    title: "Eshana Software Solutions | Quality Engineering & Test Automation",
-    description: siteConfig.description,
+    card: "summary_large_image",
+    title: socialTitle,
+    description: socialDescription,
+    images: [brandSocialImage],
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col">
@@ -35,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <Footer />
         <script
+          nonce={nonce}
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
@@ -54,7 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 name: "Lokeshwari Padmanabhan",
                 jobTitle: "Founder & Quality Engineering Consultant",
               },
-            }),
+            }).replace(/</g, "\\u003c"),
           }}
         />
       </body>

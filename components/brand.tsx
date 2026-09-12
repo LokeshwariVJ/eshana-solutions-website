@@ -1,3 +1,5 @@
+import { logoMarkPaths } from "@/lib/logo-mark";
+
 type BrandLockupProps = {
   compact?: boolean;
   align?: "left" | "center";
@@ -11,12 +13,7 @@ export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
       aria-hidden="true"
       focusable="false"
     >
-      <rect x="6" y="8" width="34" height="7" rx="1" fill="currentColor" />
-      <rect x="6" y="20.5" width="28" height="7" rx="1" fill="currentColor" />
-      <rect x="6" y="33" width="34" height="7" rx="1" fill="currentColor" />
-      <rect x="27" y="8" width="7" height="7" rx="1" className="fill-ivory" />
-      <rect x="21" y="20.5" width="7" height="7" rx="1" className="fill-ivory" />
-      <rect x="27" y="33" width="7" height="7" rx="1" className="fill-ivory" />
+      {logoMarkPaths.map((d) => <path key={d} d={d} fill="currentColor" fillRule="evenodd" />)}
     </svg>
   );
 }

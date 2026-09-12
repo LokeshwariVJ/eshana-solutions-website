@@ -77,7 +77,7 @@ test("optional company and valid product URL are accepted", () => {
 for (const [service, type] of [["Test Automation", "general"], ["Quality Audit", "quality_audit"], ["AI Initiative Gate", "ai_initiative_gate"]]) {
   test(`${service} stores ${type}`, async () => {
     const h = harness();
-    await receiveInquiry(form({ service, inquiry_type: "spoofed" }), h.deps);
+    await receiveInquiry(form({ service }), h.deps);
     assert.equal(h.rows[0].inquiry_type, type);
   });
 }
@@ -90,6 +90,35 @@ test("honeypot, duplicate fields and uploaded files are rejected", async () => {
   const file = form(); file.set("description", new Blob(["upload"]), "message.txt");
   assert.equal((await receiveInquiry(file, h.deps)).status, "error");
   assert.equal(h.rows.length, 0);
+});
+
+test("unexpected fields and malformed action arguments fail without storage", async () => {
+  const h = harness();
+  for (const data of [null, {}, "payload", form({ inquiry_type: "spoofed" }), form({ admin: "true" })]) {
+    const result = await receiveInquiry(data as FormData, h.deps);
+    assert.deepEqual(result, { status: "error", message: inquiryFailure });
+  }
+  const excessive = form();
+  for (let i = 0; i < 21; i++) excessive.append(`$ACTION_${i}`, "metadata");
+  assert.equal((await receiveInquiry(excessive, h.deps)).status, "error");
+  assert.equal(h.rows.length, 0);
+  assert.equal(h.rateChecks(), 0);
+});
+
+test("React action metadata is accepted without being stored", async () => {
+  const h = harness();
+  assert.equal((await receiveInquiry(form({ $ACTION_ID_example: "" }), h.deps)).status, "success");
+  assert(!JSON.stringify(h.rows).includes("$ACTION_"));
+});
+
+test("markup and SQL-like text remain data in plain-text notifications", async () => {
+  const h = harness();
+  const description = "<script>alert(1)</script> '; DROP TABLE inquiries; --";
+  assert.equal((await receiveInquiry(form({ description }), h.deps)).status, "success");
+  assert.equal(h.rows[0].message, description);
+  const email = notificationMessage(h.rows[0]);
+  assert(email.text.includes(description));
+  assert(!("html" in email));
 });
 
 test("rate limit denial and outage do not create an inquiry", async () => {

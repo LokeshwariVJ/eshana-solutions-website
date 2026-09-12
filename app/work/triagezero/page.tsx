@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ButtonLink, PageHero, TagList } from "@/components/ui";
-import { selectedWork } from "@/lib/site";
+import { selectedWork, siteConfig } from "@/lib/site";
 
 const work = selectedWork[0];
+const socialTitle = "TriageZero | Eshana Software Solutions";
+const socialDescription = "AI-assisted regression failure investigation and release-risk analysis.";
+const socialImage = { url: work.image, width: work.imageWidth, height: work.imageHeight, alt: work.imageAlt };
 
 export const metadata: Metadata = {
   title: "TriageZero",
   description:
     "AI-assisted regression failure investigation using Playwright, Gemini, Google ADK, and Google Cloud.",
   alternates: { canonical: "/work/triagezero" },
+  openGraph: {
+    type: "website", title: socialTitle, description: socialDescription,
+    url: `${siteConfig.url}${work.href}`, siteName: siteConfig.name, images: [socialImage],
+  },
+  twitter: { card: "summary_large_image", title: socialTitle, description: socialDescription, images: [socialImage] },
 };
 
 export default function TriageZeroPage() {

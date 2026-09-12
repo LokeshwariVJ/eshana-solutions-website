@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Eshana Software Solutions LLC",
   shortName: "Eshana",
   tagline: "Build fast. Ship with confidence.",
-  url: "https://eshanasolutions.com",
+  url: "https://www.eshanasolutions.com",
   description:
     "Eshana Software Solutions provides Quality Engineering, test automation, API testing, AI-assisted software quality, and QA consulting for startups and modern software teams.",
   email: "hello@eshanasolutions.com",

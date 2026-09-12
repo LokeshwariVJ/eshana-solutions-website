@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ButtonLink, PageHero, TagList } from "@/components/ui";
-import { selectedWork } from "@/lib/site";
+import { selectedWork, siteConfig } from "@/lib/site";
 
 const work = selectedWork[1];
+const socialTitle = "AEC Quality Workflow | Eshana Software Solutions";
+const socialDescription = "A digital QA/QC workflow for architecture and engineering project reviews.";
+const socialImage = { url: work.image, width: work.imageWidth, height: work.imageHeight, alt: work.imageAlt };
 
 export const metadata: Metadata = {
   title: "AEC Quality Workflow",
   description:
     "A digital engineering QA/QC review workflow built with Next.js, Supabase, Playwright, and Vercel.",
   alternates: { canonical: "/work/aec-quality-workflow" },
+  openGraph: {
+    type: "website", title: socialTitle, description: socialDescription,
+    url: `${siteConfig.url}${work.href}`, siteName: siteConfig.name, images: [socialImage],
+  },
+  twitter: { card: "summary_large_image", title: socialTitle, description: socialDescription, images: [socialImage] },
 };
 
 export default function AecQualityWorkflowPage() {

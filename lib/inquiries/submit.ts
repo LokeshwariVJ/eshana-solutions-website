@@ -1,5 +1,5 @@
 import "server-only";
-import { inquiryFailure, inquirySuccess, type ContactFormState } from "../contact";
+import { contactLimits, inquiryFailure, inquirySuccess, type ContactFormState } from "../contact";
 import { validateInquiry, type Inquiry } from "./validation";
 
 export type StoredInquiry = Inquiry & { id: string; created_at: string };
@@ -11,6 +11,16 @@ export type InquiryDependencies = {
 };
 
 export async function receiveInquiry(form: FormData, deps: InquiryDependencies): Promise<ContactFormState> {
+  if (!(form instanceof FormData)) return { status: "error", message: inquiryFailure };
+  let fields = 0;
+  for (const [key, value] of form.entries()) {
+    fields++;
+    // React may include its own action metadata for progressive form submissions.
+    if (fields > 20 || typeof value !== "string" ||
+        (!Object.hasOwn(contactLimits, key) && key !== "website_confirm" && !key.startsWith("$ACTION_"))) {
+      return { status: "error", message: inquiryFailure };
+    }
+  }
   const trap = form.getAll("website_confirm");
   if (trap.length > 1 || trap.some((value) => typeof value !== "string" || value !== "")) {
     return { status: "error", message: inquiryFailure };

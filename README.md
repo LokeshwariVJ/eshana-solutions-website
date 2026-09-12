@@ -89,7 +89,7 @@ header is trusted. Locally, or without a trusted address, visitors share an IP b
 Other hosts must adapt `requestAddress` to their trusted proxy configuration.
 See [Vercel request headers](https://vercel.com/docs/headers/request-headers).
 
-Next.js retains its same-origin Server Action protections and default request-body
+Next.js retains its same-origin Server Action protections with a 64 KB request-body
 limit. Do not broaden allowed origins without reviewing the deployment's needs.
 Turnstile can later be verified server-side before `receiveInquiry` permits storage.
 
@@ -129,3 +129,29 @@ After applying the migration and configuring credentials:
 
 Without credentials/migration, valid local submissions return a generic error,
 never a fake success. Payments and unrelated website features are unchanged.
+
+See [SECURITY.md](SECURITY.md) for the CSP rendering tradeoff, production checks,
+database hardening migration, permission assertions, and incident response steps.
+# Browser Tests
+
+Install browsers once with `npx playwright install chromium webkit`, then run `npm run build`.
+
+```sh
+npm run test:e2e
+npm run test:e2e:headed
+npm run test:e2e:smoke
+npm run test:e2e:prod
+npm run test:e2e:report
+```
+
+`PLAYWRIGHT_BASE_URL` defaults to `http://localhost:3000`. Playwright starts `next start` on the selected local port, or reuses a running local server outside CI. To test a fresh production build without an existing dev server, use `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:e2e`. Remote URLs never start a local server.
+
+The local browser harness removes only CSP's `upgrade-insecure-requests` response directive because WebKit upgrades loopback assets while `next start` serves HTTP. All other CSP rules stay active, raw header tests remain unmodified, and remote responses are never rewritten. Use an HTTPS deployment for end-to-end transport validation. Set `PLAYWRIGHT_OUTPUT_DIR` as well as `PLAYWRIGHT_REPORT_DIR` when retaining separate runs.
+
+`@smoke` covers safe public navigation, content, images, pricing, responsive layouts, sitemap/robots, known missing admin route, console errors, and deployed HTTPS/HSTS. `@release` adds strict branded social metadata, new logo, and CSP/security-header regressions. Those changes must be deployed before running the full suite against production; the public smoke command intentionally does not certify these newer release controls. To certify a candidate deployment, run `PLAYWRIGHT_BASE_URL=https://your-preview.example npm run test:e2e`.
+
+Production smoke always disables successful submissions and blocks browser writes. `@validation` runs only locally and sends an invalid email to exercise server rejection without creating a row. Existing unit tests cover all validation rules, unsupported services, and inquiry-type mapping.
+
+`ENABLE_E2E_FORM_SUBMISSION=true` explicitly enables one `@submission` test in its own Chromium project with no retries. It creates a real inquiry and notification using `TEST ONLY - Playwright` and `playwright-test@example.com`. Prefer a staging database/mailbox; configure server credentials there separately. Do not enable this in ordinary CI. Do not use sharding, `--repeat-each`, parallel workflow runs, or rerun this test casually: the one-record limit is per normal runner invocation, not a distributed quota. Tests never delete database records. Browser artifacts can include test input and should remain access-controlled.
+
+Reports are written to `playwright-report/` (override with `PLAYWRIGHT_REPORT_DIR`); failure screenshots/videos and retry traces go to `test-results/`. PR/main CI runs the local build without provider secrets; the manual production workflow runs read-only smoke only.

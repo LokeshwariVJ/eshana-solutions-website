@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { GateChecks, GateEngagement } from "@/components/ai-initiative-gate";
 import { ButtonLink, PageHero, SectionIntro } from "@/components/ui";
 import { gateContactPath, gateDeliverables, gatePath } from "@/lib/ai-initiative-gate";
 import { siteConfig } from "@/lib/site";
+import { brandSocialImage } from "@/lib/social";
 
 const title = "AI Initiative Gate | Eshana Software Solutions";
 const description =
@@ -13,8 +15,8 @@ export const metadata: Metadata = {
   title: "AI Initiative Gate",
   description,
   alternates: { canonical: url },
-  openGraph: { type: "website", title, description, url, siteName: siteConfig.name },
-  twitter: { card: "summary", title, description },
+  openGraph: { type: "website", title, description, url, siteName: siteConfig.name, images: [brandSocialImage] },
+  twitter: { card: "summary_large_image", title, description, images: [brandSocialImage] },
 };
 
 const questions = [
@@ -49,10 +51,12 @@ const example = [
   },
 ];
 
-export default function AiInitiativeGatePage() {
+export default async function AiInitiativeGatePage() {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <>
       <script
+        nonce={nonce}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
