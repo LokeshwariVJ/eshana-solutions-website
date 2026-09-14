@@ -79,14 +79,13 @@ export default function ServicesPage() {
             {gateEngagement.map((step, index) => (
               <li key={step.title} className="min-w-0 border-t border-line pt-6">
                 <p className="text-sm font-medium text-teal" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
-                <h3 className="mt-3 text-xl font-semibold text-ink">{step.summaryTitle}</h3>
-                <p className="mt-3 text-base font-medium text-ink">{step.price}</p>
+                <h3 className="mt-3 text-xl font-semibold text-ink">{step.title}</h3>
               </li>
             ))}
           </ol>
-          <p className="mt-8 text-sm text-muted">Workshop fee is credited toward a Full Gate Assessment if you proceed within 30 days.</p>
+          <p className="mt-8 text-sm text-muted">Fixed-scope engagements. Scope and fee are confirmed after an initial conversation.</p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <ButtonLink href={gatePath}>Learn about the AI Initiative Gate</ButtonLink>
+            <ButtonLink href={gatePath}>Explore the AI Initiative Gate</ButtonLink>
           </div>
         </div>
       </section>

@@ -87,8 +87,8 @@ export default function Home() {
           </div>
           <div className="space-y-5 text-base leading-7 text-muted">
             <p>Eshana evaluates feasibility, infrastructure readiness, ownership, risk, ROI, and pilot success criteria before money moves.</p>
-            <p className="font-medium text-ink">Workshop — $1,500 fixed</p>
-            <p className="text-sm">Workshop fee credited toward a Full Gate Assessment if you proceed within 30 days.</p>
+            <p className="font-medium text-ink">Fixed-scope advisory engagements.</p>
+            <p className="text-sm">Scope and fee are confirmed after an initial conversation.</p>
             <div className="flex flex-wrap gap-3 pt-2">
               <ButtonLink href={gatePath}>Explore the AI Initiative Gate</ButtonLink>
             </div>
